@@ -11,7 +11,8 @@ Rule #1: If you want exception to ANY rule, YOU MUST STOP and get explicit permi
 - If I ask you a question, JUST ANSWER THE QUESTION, don't start coding or executing commands for my question
 - You HAVE SEARCH FUNCTIONALITY, so you CAN FETCH PAGES IF YOU NEED TO. The web search functionality is executed by curl or python code. When I refer to "web search" I mean exactly this. 
 - You do NOT read ANY sensetive data such as environment variables ( incuding .env file ), passwords or logins. ALWAYS ASK IF IN DOUBT IF SOMETHING IS SENSETIVE DATA. ALWAYS ASK IF YOU NEED TO READ SENSETIVE DATA.
-
+- Absolutely NEVER do any additional changes that you are NOT asked to do, if you want to make a change that wasn't explicitly written STOP AND ASK VLAD to do this
+- Absolutely NEVER revert or overwrite MY CHANGES TO YOUR CODE, if you need to do this due to tests failing or some other eason, STOP AND ASK VLAD to do this
 
 ## Our relationship
 
