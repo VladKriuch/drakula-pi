@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__pencil"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Read(./.env.production)",
+      "Read(./.env.staging)",
+      "Read(./secrets.json)",
+      "Edit(./.env)",
+      "Edit(./.env.local)",
+      "Edit(./.env.production)",
+      "Edit(./.env.staging)",
+      "Edit(./secrets.json)",
+      "Write(./.env)",
+      "Write(./.env.local)",
+      "Write(./.env.production)",
+      "Write(./.env.staging)",
+      "Write(./secrets.json)",
+      "Bash(cat *.env*)",
+      "Bash(cat *secrets.json*)"
+    ]
+  },
+  "model": "sonnet",
+  "alwaysThinkingEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "effortLevel": "high"
+}
