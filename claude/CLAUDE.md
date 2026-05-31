@@ -127,7 +127,7 @@ When asked to do something, just do it - including obvious follow-up actions nee
 
 ## Issue tracking
 
-- You will use IMPLEMENTATION_PLAN.md as prioritized task list, the plan will be generated upon "planning session" and each "building session" will then take 1 task from plan and implement it
+- Use the `writing-plans` skill to generate implementation plans during "planning sessions". Each "building session" takes 1 task from the plan and implements it.
 
 # Rules
 

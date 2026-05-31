@@ -1,0 +1,3 @@
+- [+] Add journaling skill
+- [ ] Think of an exclusion system for AGENTS.md, I don't want it to be only coder 
+- [ ] Github pr review skill along with dockerfile review

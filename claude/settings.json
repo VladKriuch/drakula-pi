@@ -21,10 +21,16 @@
       "Write(./secrets.json)",
       "Bash(cat *.env*)",
       "Bash(cat *secrets.json*)"
-    ]
+    ],
+    "defaultMode": "auto"
   },
-  "model": "sonnet",
+  "model": "claude-opus-4-6[1m]",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
+  },
   "alwaysThinkingEnabled": true,
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
-  "effortLevel": "high"
+  "preferredNotifChannel": "terminal_bell",
+  "skipAutoPermissionPrompt": true
 }
