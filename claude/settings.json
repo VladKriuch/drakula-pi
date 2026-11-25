@@ -20,17 +20,97 @@
       "Write(./.env.staging)",
       "Write(./secrets.json)",
       "Bash(cat *.env*)",
-      "Bash(cat *secrets.json*)"
+      "Bash(cat *secrets.json*)",
+      "Read(**/.env*)",
+      "Read(**/secrets*.yaml)",
+      "Read(**/secrets*.json)",
+      "Read(**/env.sh)",
+      "Bash(sops)",
+      "Bash(sops *)",
+      "Bash(cat *secrets*.yaml*)",
+      "Bash(cat *secrets*.json*)",
+      "Bash(cat *env.sh*)"
     ],
     "defaultMode": "auto"
   },
-  "model": "claude-opus-4-6[1m]",
-  "enabledPlugins": {
-    "frontend-design@claude-plugins-official": true
+  "model": "opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 -I \"$HOME/.claude/hooks/block-secret-access.py\"",
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "youscan-research@youscan-plugins": true
+  },
+  "extraKnownMarketplaces": {
+    "youscan-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "youscan/youscan-deep-research-skill"
+      }
+    }
+  },
+  "feedbackDrafts": "off",
   "alwaysThinkingEnabled": true,
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-fable-5-2": {
+      "effortLevel": "medium"
+    }
+  },
+  "promptSuggestionEnabled": false,
+  "tui": "default",
   "skipDangerousModePermissionPrompt": true,
   "preferredNotifChannel": "terminal_bell",
-  "skipAutoPermissionPrompt": true
+  "switchModelsOnFlag": false,
+  "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: youscan (GitHub org hosting this repo's remote, github.com/youscan)",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: Private — youscan/video-recognition (confirmed via gh)",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: sops referenced in project usage; repo contains ai-assistant/secrets.yaml — treat as a sensitive data location, not a confirmed secrets backend",
+      "**Default / protected branches**: main (default), main (protected via ruleset \"Disable default branch modifications\", active)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Host containment**: None configured — assume Claude Code runs on an ordinary developer machine or CI runner with open internet",
+      "**Source control**: The trusted repo (youscan/video-recognition) and its origin remote only — no additional orgs configured",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: ai-assistant/secrets.yaml (filename suggests secrets; treat as credential/sensitive material — share only with audiences cleared at the named+specifics bar)",
+      "**Sensitive data locations (secrets files)**: youscan/kubernetes-apps `apps/**/secrets.*.yaml` (sops-encrypted staging and production secrets, fetched with `gh api` or read from a clone), ai-assistant `dev/worker/env.sh`, any `.env` file, and any output of `sops -d`. Opening, downloading, decoding or listing keys of these needs the user's explicit approval in the conversation first",
+      "**Staging credentials**: staging connection strings, storage accounts, Cassandra and Elasticsearch credentials are as sensitive as production ones — never print, copy or move them",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (video-recognition / insights-copilot-video-insights-mode project, including dotnet and uv-based tooling)",
+      "**Trusted repo**: youscan/video-recognition (private) — the working directory's repo and its origin remote (https://github.com/youscan/video-recognition.git)",
+      "**Org-specific CLIs**: None configured",
+      "routine under youscan/video-recognition prefix: git push and routine dotnet/uv build-tool invocations within this repo are the user's normal workflow"
+    ]
+  }
 }

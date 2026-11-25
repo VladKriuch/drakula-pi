@@ -1,15 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CONFIG="$(cd "$(dirname "$0")/../claude" && pwd)"
+source "$(dirname "$0")/link.sh"
+
 TARGET="$HOME/.claude"
 
-mkdir -p "$TARGET"
+# skills/ is a real folder because the Claude app writes its synced skills into it
+mkdir -p "$TARGET/skills"
 
-for item in CLAUDE.md settings.json skills system-prompt.md; do
-  [ ! -e "$CONFIG/$item" ] && continue
-  ln -sf "$CONFIG/$item" "$TARGET/$item"
-  echo "$item → linked"
+link "$COMMON/AGENTS.md" "$TARGET/CLAUDE.md"
+
+for item in settings.json system-prompt.md hooks; do
+  link "$REPO/claude/$item" "$TARGET/$item"
+done
+
+for skill in "$COMMON/skills"/*/; do
+  skill="${skill%/}"
+  link "$skill" "$TARGET/skills/$(basename "$skill")"
 done
 
 ALIAS_LINE="alias claude='claude --system-prompt-file ~/.claude/system-prompt.md'"

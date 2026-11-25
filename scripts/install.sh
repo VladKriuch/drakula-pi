@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-CONFIG="$(cd "$(dirname "$0")/../config" && pwd)"
+source "$(dirname "$0")/link.sh"
+
 TARGET="$HOME/.pi/agent"
 
 mkdir -p "$TARGET"
 
-for item in AGENTS.md settings.json extensions skills prompts; do
-  [ ! -e "$CONFIG/$item" ] && continue
-  ln -sf "$CONFIG/$item" "$TARGET/$item"
-  echo "$item → linked"
-done
+link "$COMMON/AGENTS.md" "$TARGET/AGENTS.md"
+link "$COMMON/skills" "$TARGET/skills"
+link "$REPO/pi/extensions" "$TARGET/extensions"
