@@ -77,6 +77,7 @@ Do not assume. Do not hide confusion. Show the tradeoffs.
 
 Before you implement:
 
+- List the smell titles in `<repo>/.agents/memory/smells/` and `~/.agents/memory/smells/`. Read each smell file whose title matches the work.
 - Write your assumptions. If you are not sure, ask Vlad.
 - If the request has more than one meaning, show all of them. Do not choose silently.
 - If a simpler approach exists, say so. Disagree when you have a reason.
